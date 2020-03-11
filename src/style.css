@@ -6,3 +6,6 @@
 svg {
     display: block;
 }
+#calTab{
+    border: 1px solid #888;
+}
