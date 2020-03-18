@@ -1,4 +1,4 @@
-// import "./style.css";
+import "./style.css";
 
 // import { DocumentSelectionExample } from "./component/document-selection-example";
 import { Survey } from "./component/survey"; 

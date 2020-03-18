@@ -9,3 +9,8 @@ svg {
 #calTab{
     border: 1px solid #888;
 }
+#survey{
+    border: 2px solid #888;
+    background-color: #eee;
+    text-align: center;
+}

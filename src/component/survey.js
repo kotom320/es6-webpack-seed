@@ -4,7 +4,7 @@ export class Survey {
         this.count = 1;
         this.arrayResult = [];
         this.setChk = "";
-
+        
     }
 
     init(){
@@ -16,26 +16,26 @@ export class Survey {
         this.nextBtn();
         this.preBtn();
     }
-    removeS(i){
-        if(i==1){
+    removeS(id){
+        if(id==1){
             this.newForm.removeChild(this.input1);
         }
-        if(i==2){
+        if(id==2){
             this.newForm.removeChild(this.input1);
             this.newForm.removeChild(this.input2);
             this.newForm.removeChild(this.label1);
             this.newForm.removeChild(this.label2);
         }
-        if(i==3){
+        if(id==3){
             this.newForm.removeChild(this.input1);
             this.newForm.removeChild(this.input2);
             this.newForm.removeChild(this.input3);
             this.newForm.removeChild(this.label1);
             this.newForm.removeChild(this.label2);
             this.newForm.removeChild(this.label3);
-        }if(i==4){
+        }if(id==4){
             this.newForm.removeChild(this.select);
-        }if(i==5){
+        }if(id==5){
             this.newForm.removeChild(this.textArea);
         }
         this.newForm.removeChild(this.btnSubmit);
@@ -86,136 +86,136 @@ export class Survey {
             
         });
     }
-    s1() {
+    rederForm(surveyForm){
         this.title = document.querySelector("#title");
-        this.title.innerHTML="1.이름을 입력하세요";
-        this.input1 = document.createElement('input');
-
-        this.input1.type = "text";
-        this.input1.name = "s1";
-
-        this.newForm.appendChild(this.input1);
-        this.btnSubmit = document.createElement('input');
-        this.btnSubmit.type = "submit";
-        this.newForm.appendChild(this.btnSubmit);
-
-        this.title.after(this.newForm); 
-        this.submit();  
-    }
-    s2() {
-        this.title = document.querySelector("#title")
-        this.title.innerHTML="2.성별을 선택하세요";
-
-        this.input1 = document.createElement('input');
-        this.input2 = document.createElement('input');
-        this.label1 = document.createElement('label');
-        this.label2 = document.createElement('label');
-
-        this.label1.innerHTML = "남자";
-        this.label2.innerHTML = "여자";
-
-
-        this.input1.type = "radio";
-        this.input1.name = "s2";
-        this.input1.value="남자";
-        this.input2.setAttribute("type","radio");
-        this.input2.setAttribute("name","s2");
-        this.input2.setAttribute("value","여자");
-
-
-        this.newForm.appendChild(this.input1);
-        this.newForm.appendChild(this.label1);
-        this.newForm.appendChild(this.input2);
-        this.newForm.appendChild(this.label2);
-
-        this.btnSubmit = document.createElement('input');
-        this.btnSubmit.type = "submit";
-        this.newForm.appendChild(this.btnSubmit);
-
-        this.title.after(this.newForm);  
-        this.submit();  
-    }
-    s3() { 
-        this.title = document.querySelector("#title")
-        this.title.innerHTML="3.언어를 선택하세요";
-
         this.input1 = document.createElement('input');
         this.input2 = document.createElement('input');
         this.input3 = document.createElement('input');
-
-        this.input1.setAttribute("type","checkbox");
-        this.input1.setAttribute("name","s31");
-        this.input1.setAttribute("value","java");
-
-        this.input2.setAttribute("type","checkbox");
-        this.input2.setAttribute("name","s32");
-        this.input2.setAttribute("value","javaScript");
-
-        this.input3.setAttribute("type","checkbox");
-        this.input3.setAttribute("name","s33");
-        this.input3.setAttribute("value","python");
-
         this.label1 = document.createElement('label');
         this.label2 = document.createElement('label');
         this.label3 = document.createElement('label');
 
-        this.label1.innerHTML = "JAVA"
-        this.label2.innerHTML = "JavaScript"
-        this.label3.innerHTML = "Python"
-       
-        this.newForm.appendChild(this.input1);
-        this.newForm.appendChild(this.label1);
-        this.newForm.appendChild(this.input2);
-        this.newForm.appendChild(this.label2);
-        this.newForm.appendChild(this.input3);
-        this.newForm.appendChild(this.label3);
-
-        this.btnSubmit = document.createElement('input');
-        this.btnSubmit.type = "submit";
-        this.newForm.appendChild(this.btnSubmit);
-
-        this.title.after(this.newForm);  
-
-
-    }
-    s4(){
-        this.title = document.querySelector("#title");
-        this.title.innerHTML="4.좋아하는 애완동물은?";
 
         this.select = document.createElement('select');
-
         this.option1 = document.createElement('option');
         this.option2 = document.createElement('option');
-        this.select.setAttribute("name","s4");
-        this.select.setAttribute("id","s4");
-        this.option1.setAttribute("value","강아지");
-        this.option2.setAttribute("value","고양이");
-        this.option1.innerText = "강아지";
-        this.option2.innerText = "고양이";
 
-        this.select.appendChild(this.option1);
-        this.select.appendChild(this.option2);
+        this.textArea = document.createElement("textarea");
 
-        this.newForm.appendChild(this.select);
         this.btnSubmit = document.createElement('input');
         this.btnSubmit.type = "submit";
+
+        
+        this.input1.type = surveyForm.type;
+        this.input1.name = surveyForm.name;
+        this.input1.value = surveyForm.value[0];
+
+        this.input2.type = surveyForm.type;
+        this.input2.name = surveyForm.name;
+        this.input2.value = surveyForm.value[1];
+
+        this.input3.type = surveyForm.type;
+        this.input3.name = surveyForm.name;
+        this.input3.value = surveyForm.value[2];
+        
+        this.label1.innerHTML = surveyForm.value[0];
+        this.label2.innerHTML = surveyForm.value[1];
+        this.label3.innerHTML = surveyForm.value[2];
+
+        this.select.name =surveyForm.name;
+        this.select.id = surveyForm.name;
+
+        this.option1.value = surveyForm.value[0];
+        this.option2.value = surveyForm.value[1];
+
+        this.option1.innerText = surveyForm.value[0];
+        this.option2.innerText = surveyForm.value[1];
+        
+        this.textArea.name = surveyForm.name;
+
+        if(surveyForm.name == "s1"){
+        this.newForm.appendChild(this.input1);
+        }
+        if(surveyForm.name == "s2"){
+            this.newForm.appendChild(this.input1);
+            this.newForm.appendChild(this.label1);
+            this.newForm.appendChild(this.input2);
+            this.newForm.appendChild(this.label2);
+        }
+        if(surveyForm.name == "s3"){
+            this.newForm.appendChild(this.input1);
+            this.newForm.appendChild(this.label1);
+            this.newForm.appendChild(this.input2);
+            this.newForm.appendChild(this.label2);
+            this.newForm.appendChild(this.input3);
+            this.newForm.appendChild(this.label3);
+            this.input1.name = "s31";
+            this.input2.name = "s32";
+            this.input3.name = "s33";
+        }
+        if(surveyForm.name == "s4"){
+            this.select.appendChild(this.option1);
+            this.select.appendChild(this.option2);
+
+            this.newForm.appendChild(this.select);
+        }
+        if(surveyForm.name == "s5"){
+            this.newForm.appendChild(this.textArea);
+        }
         this.newForm.appendChild(this.btnSubmit);
-        this.title.after(this.newForm);
+
+        this.title.innerHTML=surveyForm.subTitle;
+        this.title.after(this.newForm); 
+        this.submit();  
 
     }
+    s1() {
+        this.surveyForm ={
+            subTitle : "1.이름을 입력하세요",
+            type : "text",
+            name:"s1",
+            value : [""]
+        };
+        this.rederForm(this.surveyForm);
+
+    }
+    
+    s2() {
+        this.surveyForm ={
+            subTitle : "2.성별을 선택하세요",
+            type : "radio",
+            name:"s2",
+            value : ["남자","여자"]
+        };
+        this.rederForm(this.surveyForm);
+
+    }
+    s3() { 
+        this.surveyForm ={
+            subTitle : "3.언어를 선택하세요",
+            type : "checkbox",
+            name:"s3",
+            value : ["java","javaScript","python"]
+        };
+        this.rederForm(this.surveyForm);
+        
+    }
+    s4(){
+        this.surveyForm ={
+            subTitle : "4.좋아하는 애완동물은?",
+            type : "select",
+            name:"s4",
+            value : ["강아지","고양이"]
+        };
+        this.rederForm(this.surveyForm);
+    }
     s5(){
-        this.title = document.querySelector("#title");
-        this.title.innerHTML="5.하고싶은말";
-        this.textArea = document.createElement("textarea");
-        this.textArea.name = "s5";
-        this.newForm.appendChild(this.textArea);
-        this.btnSubmit = document.createElement('input');
-        this.btnSubmit.type = "submit";
-        this.newForm.appendChild(this.btnSubmit);
-
-        this.title.after(this.newForm);
-
-
+        this.surveyForm ={
+            subTitle : "5.하고싶은말을 남겨주세요",
+            name:"s5",
+            value : []
+        };
+        this.rederForm(this.surveyForm);
     }
     submit(){
         this.newForm.onsubmit = ()=>{
