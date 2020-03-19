@@ -1,8 +1,8 @@
 import { Form } from "./Form";
 
 export class InputTextBox extends Form{
-    constructor(){
-
+    constructor(id){
+        super(id, null);
     }
     create(){
 

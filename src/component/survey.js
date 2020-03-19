@@ -4,7 +4,7 @@ export class Survey {
         this.count = 1;
         this.arrayResult = [];
         this.setChk = "";
-        
+        this.preBtn.disabled= true;
     }
 
     init(){
@@ -43,7 +43,8 @@ export class Survey {
 
     }
     nextBtn(){
-        document.getElementById('next').addEventListener("click", ()=>{
+        this.nextBtn = document.getElementById('next');
+        this.nextBtn.addEventListener("click", ()=>{
             if(this.count == 1){
                 this.removeS(1);
                 this.s2();
@@ -53,19 +54,24 @@ export class Survey {
             }else if(this.count ==3){
                 this.removeS(3);
                 this.s4();
+
             }else if(this.count ==4){
                 this.removeS(4);
                 this.s5();
+                this.nextBtn.disabled = true;
             }
             this.count++;
             if(this.count >4){
                 this.count=5;
             }
+            this.preBtn.disabled = false;
+
 
         });
     }
     preBtn(){
-        document.getElementById('pre').addEventListener("click", ()=>{
+        this.preBtn = document.getElementById('pre');
+        this.preBtn.addEventListener("click", ()=>{
             if(this.count == 5){
                 this.removeS(5);
                 this.s4();
@@ -78,11 +84,14 @@ export class Survey {
             }else if(this.count == 2){
                 this.removeS(2);
                 this.s1();
+                this.preBtn.disabled= true;
             }
             this.count--;
             if(this.count <2){
                 this.count=1;
             }
+            this.nextBtn.disabled = false;
+
             
         });
     }
@@ -104,6 +113,7 @@ export class Survey {
 
         this.btnSubmit = document.createElement('input');
         this.btnSubmit.type = "submit";
+        this.btnSubmit.value = "확인";
 
         
         this.input1.type = surveyForm.type;
@@ -134,7 +144,7 @@ export class Survey {
         this.textArea.name = surveyForm.name;
 
         if(surveyForm.name == "s1"){
-        this.newForm.appendChild(this.input1);
+            this.newForm.appendChild(this.input1);
         }
         if(surveyForm.name == "s2"){
             this.newForm.appendChild(this.input1);
@@ -162,6 +172,7 @@ export class Survey {
         if(surveyForm.name == "s5"){
             this.newForm.appendChild(this.textArea);
         }
+        //제출버튼
         this.newForm.appendChild(this.btnSubmit);
 
         this.title.innerHTML=surveyForm.subTitle;
@@ -177,7 +188,6 @@ export class Survey {
             value : [""]
         };
         this.rederForm(this.surveyForm);
-
     }
     
     s2() {
