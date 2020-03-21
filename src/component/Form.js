@@ -1,20 +1,22 @@
-import { create } from "domain";
 
 export class Form {
     constructor(id,items){
         this.id = id;
         this.items = items;
-        create();
         this.count = 1;
+        this.create();
     }
 
     create(){
         this.survey = document.querySelector("#survey");
+       
         this.newForm = document.createElement('form');
         this.newForm.name = 'form';
         this.newForm.method ='post';
         this.newForm.action = '#';
         
+        this.btnWrap = document.createElement("div");
+
         this.preBtn = document.createElement('button');
         this.preBtn.id = 'pre';
         this.preBtn.innerText = '이전';
@@ -28,21 +30,24 @@ export class Form {
         this.btnSubmit.value = "확인";
 
         this.title = document.createElement("h3");
-        this.title.innerHTML = items.subTitle;
+        this.title.innerHTML = this.items.subTitle;
 
         this.newForm.appendChild(this.title);
-        renderSurvey(this.items);
-        this.newForm.appendChild(this.preBtn);
-        this.newForm.appendChild(this.nextBtn);
-        nextBtnAct();
-        preBtnAtc();
+        this.renderSurvey(this.items);
+        this.btnWrap.appendChild(this.preBtn);
+        this.btnWrap.appendChild(this.nextBtn);
+        this.nextBtnAct();
+        this.preBtnAtc();
+        this.submit();
 
         this.survey.appendChild(this.newForm);
+        this.survey.append(this.btnWrap);
     }
-    renderSurvey(id,items){
+    renderSurvey(items){
 
     }
-    removeSurvey(id){
+    removeSurvey(){
+        alert("폼 제거");
     }
     nextBtnAct(){
         this.nextBtn.addEventListener("click", ()=>{
@@ -59,7 +64,18 @@ export class Form {
     
 
     submit(){
-        
+        this.newForm.onsubmit = ()=>{
+            this.check = this.newForm.s1.value;
+            this.arrayResult += this.check;
+                if(!this.check){
+                    alert("내용을 반드시 입력해주세요");
+                }
+                else{
+                    alert(this.arrayResult);
+                }
+            return false;
+
+        }
         
     }
   
