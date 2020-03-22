@@ -4,18 +4,26 @@ export class Form {
         this.id = id;
         this.items = items;
         this.count = 1;
-        this.create();
+        this.stepNum = 1;
+        this.arrayResult = [];
+        this.init();
     }
-
-    create(){
-        this.survey = document.querySelector("#survey");
-       
+    init(){
+        this.create(this.id);
+    }
+    create(id){
+        // if(this.stepNum == id){
+        let survey = document.querySelector("#survey");
+        this.surveyWrap = document.createElement("div");
+        this.surveyWrap.id = 'sWrap';
         this.newForm = document.createElement('form');
-        this.newForm.name = 'form';
+        this.newForm.name = 'form'+this.id;
         this.newForm.method ='post';
         this.newForm.action = '#';
         
         this.btnWrap = document.createElement("div");
+        this.btnWrap.id = "btnWrap";
+
 
         this.preBtn = document.createElement('button');
         this.preBtn.id = 'pre';
@@ -38,40 +46,68 @@ export class Form {
         this.btnWrap.appendChild(this.nextBtn);
         this.nextBtnAct();
         this.preBtnAtc();
-        this.submit();
+        // this.submit();
 
-        this.survey.appendChild(this.newForm);
-        this.survey.append(this.btnWrap);
+        survey.appendChild(this.newForm);
+        survey.appendChild(this.btnWrap);
+
+            // this.showDisplay();
+        // }     
+       
+    }
+    showDisplay(){
+        if(this.count == this.id){
+            this.newForm.style.display = 'block';
+            this.btnWrap.style.display = 'block';
+
+        }else{
+            this.newForm.style.display = 'none';
+            this.btnWrap.style.display = 'none';
+
+        }
     }
     renderSurvey(items){
 
     }
     removeSurvey(){
-        alert("폼 제거");
+        let survey = document.getElementById('survey');
+        while(survey.firstChild){
+            survey.removeChild(survey.firstChild);
+        }
+
     }
     nextBtnAct(){
         this.nextBtn.addEventListener("click", ()=>{
-            this.removeSurvey();
-            
+            this.count++;
+            alert(this.count);
+            // this.removeSurvey();
+            this.update();
         });
+    }
+
+    update(){
+        this.create(this.count);
     }
     preBtnAtc(){
         this.preBtn.addEventListener("click", ()=>{
-            this.removeSurvey();
-            this.renderSurvey();
+            this.count--;
+            alert(this.count);
+
         });
     }
     
 
     submit(){
         this.newForm.onsubmit = ()=>{
+            let name = this.items.name;
             this.check = this.newForm.s1.value;
-            this.arrayResult += this.check;
+            this.arrayResult[this.id-1] = this.check;
                 if(!this.check){
                     alert("내용을 반드시 입력해주세요");
                 }
                 else{
                     alert(this.arrayResult);
+                    this.create(2);
                 }
             return false;
 

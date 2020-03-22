@@ -4,6 +4,7 @@ export class InputTextBox extends Form{
     constructor(id,items){
         super(id,items);
         this.title = ""
+        this.stepNum = 1;
     }
    
     renderSurvey(items){
